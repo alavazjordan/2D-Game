@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -36,9 +35,14 @@ public class Player extends Entity{
 	
 	public void getPlayerImage() {
 		try {
-			idle = ImageIO.read(getClass().getResourceAsStream("/player/RusselIdle.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/RusselDown1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/RusselDown2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Down1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Down2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Up1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Up2.png"));
+			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Left1.png"));
+			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Left2.png"));
+			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Right1.png"));
+			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Right2.png"));
 		}
 		catch(IOException e){
 			e.printStackTrace();
@@ -53,18 +57,20 @@ public class Player extends Entity{
 				direction = "up";
 	            y -= speed;
 	        }
-	        if(keyH.downPressed == true){
+			if(keyH.downPressed == true){
 	        	direction = "down";
 	            y += speed;
 	        }
-	        if(keyH.leftPressed == true){
+			if(keyH.leftPressed == true){
 	        	direction = "left";
 	            x -= speed;
 	        }
-	        if(keyH.rightPressed == true){
+	        
+			if(keyH.rightPressed == true){
 	        	direction = "right";
 	            x += speed;
 	        }
+	        
 	        
 	        spriteCounter++;
 	        if(spriteCounter > 12) {
@@ -77,10 +83,6 @@ public class Player extends Entity{
 	        	spriteCounter = 0;
 	        }
 		}
-		else {
-			direction = "idle";
-		}
-		
 	}
 	
 	
@@ -88,23 +90,38 @@ public class Player extends Entity{
 		BufferedImage image = null;
 		
 		switch(direction) {
-		//case "up":
-		//	image = up1;
+		case "up":
+			if(spriteNum == 1) {
+				image = up1;
+			}
+			else if(spriteNum == 2) {
+				image = up2;
+			}
 		case "down":
 			if(spriteNum == 1) {
 				image = down1;
+				System.out.println("not bruh");
 			}
-			if(spriteNum == 2) {
+			else if(spriteNum == 2) {
 				image = down2;
 			}
-		case "idle":
-			image = idle;
-		//case "left":
-		//	image = left1;
-		//case "right":
-		//  image = right1;
+		case "left":
+			if(spriteNum == 1) {
+				image = left1;
+			}
+			else if(spriteNum == 2) {
+				image = left2;
+			}
+		case "right":
+			if(spriteNum == 1) {
+				image = right1;
+			}
+			else if(spriteNum == 2) {
+				image = right2;
+				System.out.println("Bruh");
+			}
 		}
-		
+		System.out.println(direction);
 		g2.drawImage(image, x, y, mp.tileSize, mp.tileSize, null);
 	}
 }

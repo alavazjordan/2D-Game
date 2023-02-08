@@ -7,7 +7,12 @@ import javax.swing.JFrame;
 public class Main extends JFrame{
  
 
-    public Main(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Main(){
         Container pane = getContentPane();
         MyPanel mp = new MyPanel();
         pane.add(mp);
